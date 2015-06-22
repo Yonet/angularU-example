@@ -16,12 +16,9 @@ var AppComponent = (function () {
         this.name = 'Angular 2 + D3';
         this.values = [10, 49, 29, 69, 37];
     }
-    AppComponent.prototype.addData = function (num) {
-        this.values.push(num);
-    };
     AppComponent.prototype.doneTyping = function ($event) {
         if ($event.which === 13) {
-            this.addData($event.target.value);
+            this.values.push($event.target.value);
             $event.target.value = "";
         }
     };
@@ -30,16 +27,11 @@ var AppComponent = (function () {
             selector: 'viz-app' //Defines the viz-app tag
         }),
         angular2_1.View({
-            template: "\n\t<h1>{{name}} example</h1>\n\t<p>Values:</p>\n\t<ul>\n\t\t<li *for=\"#value of values\">\n\t\t\t{{value}}\n\t\t</li>\n\t</ul>\n\t<input #num (keyup)=\"doneTyping($event)\">\n\t<button (click)=\"addData(num.value)\">Add</button>\n\t",
+            template: "\n\t<h1>{{name}} example</h1>\n\t<p>Values:</p>\n\t<ul>\n\t\t<li *for=\"#value of values\">\n\t\t\t{{value}}\n\t\t</li>\n\t</ul>\n\t<input #num (keyup)=\"doneTyping($event)\">\n\t",
             directives: [angular2_1.For]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 })();
-// class DataService {
-// 	constructor() {
-// 		this.values = [10, 49, 29, 69, 37];
-// 	}
-// }
 angular2_1.bootstrap(AppComponent);
