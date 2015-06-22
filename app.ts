@@ -14,36 +14,25 @@ import {Component, View, bootstrap, For} from 'angular2/angular2';
 		</li>
 	</ul>
 	<input #num (keyup)="doneTyping($event)">
-	<button (click)="addData(num.value)">Add</button>
 	`,
 	directives: [For]
 })
 
 class AppComponent {
 	name: string;
-	values
+	values: Array<number>;
 	constructor() {
 		this.name = 'Angular 2 + D3';
 		this.values = [10, 49, 29, 69, 37];
-		
-	}
-
-	addData (num: number) {
-		this.values.push(num);
 	}
 
 	doneTyping($event) {
-		if ($event.which === 13) {
+		if ($event.which === 13) { ///Enter key press
 			this.addData($event.target.value);
 			$event.target.value = "";
 		}
 	}
 }
 
-// class DataService {
-// 	constructor() {
-// 		this.values = [10, 49, 29, 69, 37];
-// 	}
-// }
 
 bootstrap(AppComponent); 
