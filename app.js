@@ -14,16 +14,32 @@ var angular2_1 = require('angular2/angular2');
 var AppComponent = (function () {
     function AppComponent() {
         this.name = 'Angular 2 + D3';
+        this.values = [10, 49, 29, 69, 37];
     }
+    AppComponent.prototype.addData = function (num) {
+        this.values.push(num);
+    };
+    AppComponent.prototype.doneTyping = function ($event) {
+        if ($event.which === 13) {
+            this.addData($event.target.value);
+            $event.target.value = "";
+        }
+    };
     AppComponent = __decorate([
         angular2_1.Component({
-            selector: 'viz-app' // Defines the <my-app></my-app> tag
+            selector: 'viz-app' //Defines the viz-app tag
         }),
         angular2_1.View({
-            template: '<h1>{{name}} example</h1>' // Defines the inline template for the component
+            template: "\n\t<h1>{{name}} example</h1>\n\t<p>Values:</p>\n\t<ul>\n\t\t<li *for=\"#value of values\">\n\t\t\t{{value}}\n\t\t</li>\n\t</ul>\n\t<input #num (keyup)=\"doneTyping($event)\">\n\t<button (click)=\"addData(num.value)\">Add</button>\n\t",
+            directives: [angular2_1.For]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 })();
+// class DataService {
+// 	constructor() {
+// 		this.values = [10, 49, 29, 69, 37];
+// 	}
+// }
 angular2_1.bootstrap(AppComponent);
