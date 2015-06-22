@@ -28,7 +28,7 @@ class AppComponent {
 
 	doneTyping($event) {
 		if ($event.which === 13) { ///Enter key press
-			this.addData($event.target.value);
+			this.values.push($event.target.value);
 			$event.target.value = "";
 		}
 	}

@@ -18,7 +18,7 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.doneTyping = function ($event) {
         if ($event.which === 13) {
-            this.addData($event.target.value);
+            this.values.push($event.target.value);
             $event.target.value = "";
         }
     };
