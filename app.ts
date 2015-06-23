@@ -4,7 +4,6 @@ import {Component, Directive, View, Attribute, bootstrap, For, onChange, Element
 import {Inject} from 'angular2/di';
 import * as d3 from 'd3';
 
-
 @Directive({
 	selector: 'bar-graph',
 	lifecycle: [onChange],
@@ -14,41 +13,35 @@ class BarGraph {
 	data: Array<number>;
 	divs: any;
 	constructor(
-		@Inject(ElementRef) elementRef: ElementRef,
-		@Attribute('width') width: string,
-		@Attribute('height') height: string) {
-
+		@Inject(ElementRef)elementRef: ElementRef,
+		@Attribute('width')width:string,
+		@Attribute('height')height: string
+	){
 		var el: any = elementRef.domElement;
 		var graph: any = d3.select(el);
 
-		this.divs = graph.
-			append('div').
-			attr({
-				'class': 'chart'
-			}).
-			style({
+		this.divs = graph.append('div')
+			.attr({
+				'class': 'chart',
 				'width': width + 'px',
-				'height': height + 'px',
-			}).
-			selectAll('div');
+				'height': height + 'px'
+			})
+			.selectAll('div');
 	}
 
-	render(newValue) {
-		if (!newValue) return;
-
-		this.divs.data(newValue).enter().append('div')
+	render(newVal){
+		this.divs.data(newVal)
+			.enter().append('div')
 			.transition().ease('elastic')
 			.style('width', d => d + '%')
-			.text(d => d + '%');
-
+			.text(d=> d + '%');
 	}
 
-	onChange(updated) {
-		console.log('data changed', updated.data);
-		this.data = updated.data.currentValue;
-		this.render(this.data);
+	onChange(changes: 'data'){
+		this.render(changes.data.currentValue);
 	}
 }
+
 
 @Component({
 	selector: 'viz-app'
@@ -85,3 +78,46 @@ class AppComponent {
 }
 
 angular.bootstrap(AppComponent);
+
+// @Directive({
+// 	selector: 'bar-graph',
+// 	lifecycle: [onChange],
+// 	properties: ['data']
+// })
+// class BarGraph {
+// 	data: Array<number>;
+// 	divs: any;
+// 	constructor(
+// 		@Inject(ElementRef) elementRef: ElementRef,
+// 		@Attribute('width') width: string,
+// 		@Attribute('height') height: string) {
+
+// 		var el: any = elementRef.domElement;
+// 		var graph: any = d3.select(el);
+
+// 		this.divs = graph.
+// 			append('div').
+// 			attr({
+// 				'class': 'chart'
+// 			}).
+// 			style({
+// 				'width': width + 'px',
+// 				'height': height + 'px',
+// 			}).
+// 			selectAll('div');
+// 	}
+
+// 	render(newValue) {
+// 		if (!newValue) return;
+
+// 		this.divs.data(newValue).enter().append('div')
+// 			.transition().ease('elastic')
+// 			.style('width', d => d + '%')
+// 			.text(d => d + '%');
+
+// 	}
+
+// 	onChange(changes: 'data') {
+// 		this.render(changes.data.currentValue);
+// 	}
+// }

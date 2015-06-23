@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "module": "commonjs",
+        "target": "ES5",
+        "emitDecoratorMetadata": true
+    },
+    "files": [
+      "lib/angular2.d.ts",
+      "app.ts"
+    ]
+}
